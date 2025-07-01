@@ -38,7 +38,9 @@ export const useWorkoutData = () => {
   };
 
   const logWorkout = async (date: string, completed: boolean) => {
-    const dayOfWeek = new Date(date).toLocaleLowerCase().split(' ')[0] + 'day';
+    const dateObj = new Date(date);
+    const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const dayOfWeek = dayNames[dateObj.getDay()];
     const workout = workoutSchedule[dayOfWeek as keyof typeof workoutSchedule];
     
     if (!workout) return;
@@ -65,7 +67,8 @@ export const useWorkoutData = () => {
 
   const getTodaysWorkout = () => {
     const today = new Date();
-    const dayOfWeek = today.toLocaleLowerCase().split(' ')[0] + 'day';
+    const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const dayOfWeek = dayNames[today.getDay()];
     return workoutSchedule[dayOfWeek as keyof typeof workoutSchedule];
   };
 
